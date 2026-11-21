@@ -134,7 +134,7 @@ An uninstaller binary (`bgmod-uninstaller`) cleanly removes wrapper files and re
 - [**`lsfg-vk`**](https://github.com/PancakeTAS/lsfg-vk) — Lossless Scaling Frame Generation Vulkan layer
 - [**`zenergy`**](https://github.com/BoukeHaarsma23/zenergy) — Displays AMD CPU power metrics in MangoHud
 - [**`protontricks`**](https://github.com/Matoking/protontricks) — Proton prefix management (native builds only, disabled in Flatpak)
-
+- [**`low_latency_layer`**](https://github.com/Korthos-Software/low_latency_layer) — Vulkan layer for reducing input latency
 
 > [!NOTE]
 > In Flatpak, Goverlay hides host-dependent features such as GameMode and Protontricks because it cannot reliably detect or execute host binaries.
