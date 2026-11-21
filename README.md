@@ -202,7 +202,6 @@ Download the AppImage from the [Releases page](https://github.com/benjamimgois/g
 > wget https://github.com/davidbannon/libqt6pas/releases/download/v6.2.8/libqt6pas6_6.2.8-1_amd64.deb
 > sudo dpkg -i libqt6pas6_6.2.8-1_amd64.deb
 > ```
----
 
 ## Tarball
 
@@ -217,6 +216,8 @@ Download the AppImage from the [Releases page](https://github.com/benjamimgois/g
    ```
 
 > **Note:** Since version 0.6.4, MangoHud must be installed to run Goverlay.
+
+---
 
 # Building from Source
 
