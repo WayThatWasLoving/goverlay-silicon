@@ -45,7 +45,7 @@ I’m just a network engineer who loves Linux and gaming — this is my way of g
 
 ---
 
-## Table of Contents
+# Table of Contents
 
 - [Screenshots](#screenshots)
 - [Prerequisites](#prerequisites)
@@ -57,7 +57,7 @@ I’m just a network engineer who loves Linux and gaming — this is my way of g
     - [Arch and derivatives](#arch-and-derivatives)
     - [OpenSUSE](#opensuse)
     - [Solus](#solus)
-    - [Fedora / Debian / Ubuntu](#fedora--debian--ubuntu)
+    - [Fedora / Debian / Ubuntu](#solus)
   - [Tarball](#tarball)
   - [Building from Source](#building-from-source)
 - [Architecture](#architecture)
@@ -95,11 +95,11 @@ An uninstaller binary (`bgmod-uninstaller`) cleanly removes wrapper files and re
 
 ---
 
-## Screenshots
+# Screenshots
 
 <details>
 <summary><strong>Click to view screenshots</strong></summary>
-
+ 
 <img width="1129" height="843" alt="Screenshot 1" src="/data/screenshots/1.webp" />
 <img width="1129" height="843" alt="Screenshot 2" src="/data/screenshots/2.webp" />
 <img width="1129" height="843" alt="Screenshot 3" src="/data/screenshots/3.webp" />
@@ -107,17 +107,16 @@ An uninstaller binary (`bgmod-uninstaller`) cleanly removes wrapper files and re
 <img width="1129" height="843" alt="Screenshot 5" src="/data/screenshots/5.webp" />
 <img width="1129" height="843" alt="Screenshot 6" src="/data/screenshots/6.webp" />
 <img width="1129" height="843" alt="Screenshot 7" src="/data/screenshots/7.webp" />
-<img width="1129" height="843" alt="Screenshot 7" src="/data/screenshots/7.webp" />
-<img width="1129" height="843" alt="Screenshot 7" src="/data/screenshots/8.webp" />
-<img width="1129" height="843" alt="Screenshot 7" src="/data/screenshots/9.webp" />
-<img width="1129" height="843" alt="Screenshot 7" src="/data/screenshots/10.webp" />
+<img width="1129" height="843" alt="Screenshot 8" src="/data/screenshots/8.webp" />
+<img width="1129" height="843" alt="Screenshot 9" src="/data/screenshots/9.webp" />
+<img width="1129" height="843" alt="Screenshot 10" src="/data/screenshots/10.webp" />
 
 
 </details>
 
 ---
 
-## Prerequisites
+# Prerequisites
 
 ### Required
 
@@ -125,7 +124,7 @@ An uninstaller binary (`bgmod-uninstaller`) cleanly removes wrapper files and re
 - [**`git`**](https://github.com/git/git) — Used to clone repositories (e.g., ReShade shaders)
 - [**`qt6pas`**](https://gitlab.com/freepascal.org/lazarus/lazarus/-/tree/main/lcl/interfaces/qt6/cbindings) — Qt6 bindings for Free Pascal / Lazarus
 - [**`gamemode`**](https://github.com/FeralInteractive/gamemode) — Feral GameMode daemon (for the GameMode tweak)
-- **Nerd Fonts** — Used for icon glyphs in the sidebar and game badges
+- [**`Nerd Fonts`**](https://github.com/ryanoasis/nerd-fonts) — Used for icon glyphs in the sidebar and game badges
 
 ### Optional / Used by specific features
 
@@ -141,7 +140,7 @@ An uninstaller binary (`bgmod-uninstaller`) cleanly removes wrapper files and re
 
 ---
 
-## Installation
+# Installation
 
 ## Universal Methods
 
@@ -149,61 +148,61 @@ An uninstaller binary (`bgmod-uninstaller`) cleanly removes wrapper files and re
 
 You can download it from [**`Flathub`**](https://flathub.org/en/apps/io.github.benjamimgois.goverlay) or install it via terminal:
 
-```bash
-# Add Flathub repository
-flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
-
-# Install Goverlay (required Vulkan layers like MangoHud and vkBasalt are installed automatically)
-flatpak install flathub io.github.benjamimgois.goverlay
-```
+	```bash
+	# Add Flathub repository
+	flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
+	
+	# Install Goverlay (required Vulkan layers like MangoHud and vkBasalt are installed automatically)
+	flatpak install flathub io.github.benjamimgois.goverlay
+	```
 
 ### AppImage
 
 Download the AppImage from the [Releases page](https://github.com/benjamimgois/goverlay/releases) and make it executable:
 
-```bash
-chmod +x goverlay*.AppImage
-./goverlay*.AppImage
-```
+	```bash
+	chmod +x goverlay*.AppImage
+	./goverlay*.AppImage
+	```
 
 ## Distributions
 
-### Arch and derivatives
+- ### Arch and derivatives
 
-**Option 1 – Official Repository**
-```bash
-sudo pacman -S goverlay
-```
-**Option 2 – AUR**
-```bash
-yay -S goverlay-git
-```
+  - **Option 1 – Official Repository**
+    ```bash
+    sudo pacman -S goverlay
+    ```
+  - **Option 2 – AUR**
+    ```bash
+    yay -S goverlay-git
+    ```
 
-### OpenSUSE
-```bash
-sudo zypper install goverlay
-```
+- ### OpenSUSE
+	```bash
+	sudo zypper install goverlay
+	```
 
-### Solus
-```bash
-sudo eopkg it goverlay
-```
+- ### Solus
+	```bash
+	sudo eopkg it goverlay
+	```
 
 > [!IMPORTANT]
 > **Fedora / Debian / Ubuntu users:** Official repositories for these distros often ship outdated versions. It is **strongly recommended** to use the [Flatpak](#flatpak) or [AppImage](#appimage) instead.
 
+> [!NOTE]
+> 
+> The **`libqt6pas`** package is not available in some distributions’ official repositories.  
+> You can get it from [David Bannon’s repository](https://github.com/davidbannon/libqt6pas/releases).
+>
+> **Ubuntu example:**
+> ```bash
+> sudo apt-get update
+> wget https://github.com/davidbannon/libqt6pas/releases/download/v6.2.8/libqt6pas6_6.2.8-1_amd64.deb
+> sudo dpkg -i libqt6pas6_6.2.8-1_amd64.deb
+> ```
 ---
-
-#### Libqt6pas
-The `libqt6pas` package is not available in some distributions’ official repositories.  
-You can get it from [David Bannon’s repository](https://github.com/davidbannon/libqt6pas/releases):
-
-Ubuntu example:
-```bash
-sudo apt-get update
-wget https://github.com/davidbannon/libqt6pas/releases/download/v6.2.8/libqt6pas6_6.2.8-1_amd64.deb
-sudo dpkg -i libqt6pas6_6.2.8-1_amd64.deb
-```
 
 ## Tarball
 
@@ -219,16 +218,16 @@ sudo dpkg -i libqt6pas6_6.2.8-1_amd64.deb
 
 > **Note:** Since version 0.6.4, MangoHud must be installed to run Goverlay.
 
-## Building from Source
+# Building from Source
 
-### Prerequisites
+## Prerequisites
 
 - [Lazarus IDE](https://gitlab.com/freepascal.org/lazarus/lazarus) with Qt6 widgetset support
 - Qt6 development libraries (`qt6-base-dev` or equivalent)
 - `make`
 - `git`
 
-### Building
+## Building
 
 ```bash
 git clone https://github.com/benjamimgois/goverlay.git
@@ -238,13 +237,13 @@ make
 
 This compiles both `goverlay` and the integrated `pascube` Vulkan preview.
 
-### Running
+## Running
 
 ```bash
 ./goverlay
 ```
 
-### Installing
+## Installing
 
 ```bash
 sudo make install
@@ -258,7 +257,7 @@ goverlay
 
 ---
 
-## Architecture
+# Architecture
 
 | Component | Technology |
 |---|---|
@@ -272,7 +271,7 @@ goverlay
 
 ---
 
-## Keyboard Shortcuts
+# Keyboard Shortcuts
 
 | Shortcut | Action |
 |----------|--------|
@@ -283,7 +282,7 @@ goverlay
 
 ---
 
-## Credits
+# Credits
 
 ### FlightlessMango
 
