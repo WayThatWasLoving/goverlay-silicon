@@ -1356,6 +1356,7 @@ type
     FReshadeMissingBanner:  TPanel;
     FVkSumiMissingBanner: TPanel;
     FTweaksMissingBanner: TPanel;
+    FTweaksBannerPinned: Boolean;
     FDlssNrMissingBanner: TPanel;
     FLosslessMissingBanner: TPanel;
     FOptiMissingBanner: TPanel;
@@ -1407,8 +1408,9 @@ type
     procedure ViewStatusClick(Sender: TObject);
     function CreateDependencyWarningBanner(AParent: TWinControl; const AToolName, AFlatpakCmd, ANativePkg: string; AOnRecheck, AOnStatus: TNotifyEvent): TPanel;
     procedure EnsureTweaksMissingBanner;
-    procedure ShowTweaksMissingBanner(const ATitle, ADesc: string);
+    procedure ShowTweaksMissingBanner(const ATitle, ADesc: string; APinned: Boolean = False);
     procedure HideTweaksMissingBanner;
+    function IsCursorOverTweaksBanner: Boolean;
 
     function IsOptiScalerInstalled: Boolean;
     function IsDlssEnablerInstalled: Boolean;
@@ -5448,12 +5450,14 @@ begin
   end;
 end;
 
-procedure Tgoverlayform.ShowTweaksMissingBanner(const ATitle, ADesc: string);
+procedure Tgoverlayform.ShowTweaksMissingBanner(const ATitle, ADesc: string; APinned: Boolean = False);
 var
   j: Integer;
   Lbl: TLabel;
 begin
   EnsureTweaksMissingBanner;
+  if APinned then
+    FTweaksBannerPinned := True;
   FTweaksMissingBanner.Parent := tweaksTabSheet;
   FTweaksMissingBanner.SetBounds(8, 8, Max(200, tweaksTabSheet.ClientWidth - 16), 68);
   for j := 0 to FTweaksMissingBanner.ControlCount - 1 do
@@ -5474,8 +5478,20 @@ end;
 
 procedure Tgoverlayform.HideTweaksMissingBanner;
 begin
+  FTweaksBannerPinned := False;
   if Assigned(FTweaksMissingBanner) and FTweaksMissingBanner.Visible then
     FTweaksMissingBanner.Visible := False;
+end;
+
+function Tgoverlayform.IsCursorOverTweaksBanner: Boolean;
+var
+  LocalPt: TPoint;
+begin
+  Result := False;
+  if not Assigned(FTweaksMissingBanner) or (not FTweaksMissingBanner.Visible) then
+    Exit;
+  LocalPt := FTweaksMissingBanner.ScreenToClient(Mouse.CursorPos);
+  Result := PtInRect(FTweaksMissingBanner.ClientRect, LocalPt);
 end;
 
 // Check if OptiScaler is installed by looking for goverlay.vars file in cache folders
@@ -5760,6 +5776,8 @@ begin
   // Clicking the logo always returns to global config mode
   if WasInGameMode then
   begin
+    if Assigned(autoSaveTimer) then
+      autoSaveTimer.Enabled := False;
     FActiveGameName := '';
     FActiveGameAppId := '';
     FActiveGamePath := '';
@@ -5769,6 +5787,7 @@ begin
     UpdateGameContextLabel;
     HideGameThumb;
     LoadGameToggleStates;  // reset all tools to enabled, hide toggles
+    LoadMangoHudConfig;
     SetSaveBtnEnabled(True);
     FLaunchCommand := GetLaunchCommand;
     if Assigned(commandPaintBox) then
@@ -5807,6 +5826,8 @@ begin
           WriteLn('[WARN] gamesLabelClick: could not reload OptiScaler config - ', E.Message);
       end;
     end;
+    if Assigned(autoSaveTimer) then
+      autoSaveTimer.Enabled := False;
   end;
 
   SetNavActive(0);
