@@ -67,10 +67,10 @@ I’m just a network engineer who loves Linux and gaming — this is my way of g
 
 ---
 
-### Integrated Vulkan Preview (PasCube)
+## Integrated Vulkan Preview (PasCube)
 Goverlay ships with **PasCube**, a full Vulkan demo compiled from the PasVulkan engine. It launches automatically (or on demand) to preview your MangoHud, vkBasalt, and vkSumi settings in real time. The demo title bar and overlay display the current Goverlay version.
 
-### Per-Game Config Architecture
+## Per-Game Config Architecture
 When a game is selected, Goverlay switches to **Game Mode**. Each game gets its own XDG-compliant config directory containing:
 - `MangoHud.conf`
 - `vkBasalt.conf`
@@ -82,7 +82,7 @@ When a game is selected, Goverlay switches to **Game Mode**. Each game gets its 
 
 The bottom **launch command box** updates to show the game-specific `bgmod` command with `%command%` suffix, ready to paste into Steam.
 
-### bgmod Wrapper
+## bgmod Wrapper
 `bgmod` is a compiled Free Pascal binary (not a bash script) that replaces the legacy `fgmod` approach. It:
 - Intercepts game execution arguments.
 - Exports environment variables from `bgmod.conf`.
@@ -118,7 +118,7 @@ An uninstaller binary (`bgmod-uninstaller`) cleanly removes wrapper files and re
 
 # Prerequisites
 
-### Required
+## Required
 
 - [**`mangohud`**](https://github.com/flightlessmango/MangoHud) — Performance overlay / monitoring
 - [**`git`**](https://github.com/git/git) — Used to clone repositories (e.g., ReShade shaders)
@@ -126,7 +126,7 @@ An uninstaller binary (`bgmod-uninstaller`) cleanly removes wrapper files and re
 - [**`gamemode`**](https://github.com/FeralInteractive/gamemode) — Feral GameMode daemon (for the GameMode tweak)
 - [**`Nerd Fonts`**](https://github.com/ryanoasis/nerd-fonts) — Used for icon glyphs in the sidebar and game badges
 
-### Optional / Used by specific features
+## Optional / Used by specific features
 
 - [**`vkBasalt`**](https://github.com/DadSchoorse/vkBasalt) — Vulkan post-processing effects
 - [**`vksumi`**](https://github.com/reakjra/vkSumi) *(optional but recommended)* — Alternative Vulkan post-processor with 15 tunable parameters
@@ -148,45 +148,51 @@ An uninstaller binary (`bgmod-uninstaller`) cleanly removes wrapper files and re
 
 You can download it from [**`Flathub`**](https://flathub.org/en/apps/io.github.benjamimgois.goverlay) or install it via terminal:
 
-	```bash
-	# Add Flathub repository
-	flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
+```
+bash
+# Add Flathub repository
+flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
 	
-	# Install Goverlay (required Vulkan layers like MangoHud and vkBasalt are installed automatically)
-	flatpak install flathub io.github.benjamimgois.goverlay
-	```
+# Install Goverlay (required Vulkan layers like MangoHud and vkBasalt are installed automatically)
+flatpak install flathub io.github.benjamimgois.goverlay
+```
 
 ### AppImage
 
 Download the AppImage from the [Releases page](https://github.com/benjamimgois/goverlay/releases) and make it executable:
 
-	```bash
-	chmod +x goverlay*.AppImage
-	./goverlay*.AppImage
-	```
+```
+bash
+chmod +x goverlay*.AppImage
+./goverlay*.AppImage
+```
 
 ## Distributions
 
-- ### Arch and derivatives
+### Arch and derivatives
 
-  - **Option 1 – Official Repository**
-    ```bash
-    sudo pacman -S goverlay
-    ```
-  - **Option 2 – AUR**
-    ```bash
-    yay -S goverlay-git
-    ```
-
-- ### OpenSUSE
-	```bash
-	sudo zypper install goverlay
+- **Option 1 – Official Repository**
+	```
+	bash
+	sudo pacman -S goverlay
+	```
+- **Option 2 – AUR**
+	```
+	bash
+	yay -S goverlay-git
 	```
 
-- ### Solus
-	```bash
-	sudo eopkg it goverlay
-	```
+### OpenSUSE
+```
+bash
+sudo zypper install goverlay
+```
+
+### Solus
+```
+bash
+sudo eopkg it goverlay
+```
 
 > [!IMPORTANT]
 > **Fedora / Debian / Ubuntu users:** Official repositories for these distros often ship outdated versions. It is **strongly recommended** to use the [Flatpak](#flatpak) or [AppImage](#appimage) instead.
@@ -197,7 +203,8 @@ Download the AppImage from the [Releases page](https://github.com/benjamimgois/g
 > You can get it from [David Bannon’s repository](https://github.com/davidbannon/libqt6pas/releases).
 >
 > **Ubuntu example:**
-> ```bash
+> ```
+> bash
 > sudo apt-get update
 > wget https://github.com/davidbannon/libqt6pas/releases/download/v6.2.8/libqt6pas6_6.2.8-1_amd64.deb
 > sudo dpkg -i libqt6pas6_6.2.8-1_amd64.deb
@@ -206,14 +213,17 @@ Download the AppImage from the [Releases page](https://github.com/benjamimgois/g
 ## Tarball
 
 1. Download the latest tarball from the [Releases page](https://github.com/benjamimgois/goverlay/releases).
+
 2. Extract it:
-   ```bash
-   tar -xvf goverlay*.tar.xz
-   ```
+	```
+	bash
+	tar -xvf goverlay*.tar.xz
+	```
 3. Run the binary:
-   ```bash
-   ./goverlay
-   ```
+	```
+	bash
+	./goverlay
+	```
 
 > **Note:** Since version 0.6.4, MangoHud must be installed to run Goverlay.
 
@@ -230,7 +240,8 @@ Download the AppImage from the [Releases page](https://github.com/benjamimgois/g
 
 ## Building
 
-```bash
+```
+bash
 git clone https://github.com/benjamimgois/goverlay.git
 cd goverlay
 make
@@ -240,19 +251,22 @@ This compiles both `goverlay` and the integrated `pascube` Vulkan preview.
 
 ## Running
 
-```bash
+```
+bash
 ./goverlay
 ```
 
 ## Installing
 
-```bash
+```
+bash
 sudo make install
 ```
 
 This installs the startup script to `/usr/local/bin/goverlay`, allowing you to launch it directly via:
 
-```bash
+```
+bash
 goverlay
 ```
 
@@ -285,7 +299,7 @@ goverlay
 
 # Credits
 
-### FlightlessMango
+## FlightlessMango
 
 Huge thanks to **FlightlessMango**, creator and maintainer of **MangoHud** — the foundation that made Goverlay possible.
 
@@ -293,13 +307,13 @@ Huge thanks to **FlightlessMango**, creator and maintainer of **MangoHud** — t
 - https://github.com/flightlessmango/MangoHud
 - https://discord.com/invite/Gj5YmBb
 
-### DadSchoorse
+## DadSchoorse
 
 Special thanks to **DadSchoorse**, creator of **vkBasalt**, which adds post-processing effects to Vulkan.
 
 - https://github.com/DadSchoorse/vkBasalt
 
-### OptiScaler Team & Contributors
+## OptiScaler Team & Contributors
 
 Goverlay integrates several components from the OptiScaler ecosystem and community-driven projects that enable upscaling, frame generation, and NVIDIA APIs on Linux.
 
@@ -333,13 +347,13 @@ Tooling that expands compatibility layers for DLSS and NVAPI-based features.
 
 https://github.com/artur-graniszewski/DLSS-Enabler
 
-### serialexperimentslainnnn
+## serialexperimentslainnnn
 
 Special thanks to **serialexperimentslainnnn**, creator of **afmf-linux**, bringing AMD Fluid Motion Frames frame generation to Linux.
 
 - https://github.com/serialexperimentslainnnn/afmf-linux
 
-### Lazarus IDE
+## Lazarus IDE
 
 This project was built using the [Lazarus IDE](https://www.lazarus-ide.org/).
 
